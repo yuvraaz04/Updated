@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lachoo College - Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lachoo_style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    {% include 'lachoo_header.html' %}
+    {% include 'logout_button.html' %}
+    
+    <div class="content-box">
+        <h2 class="center-content">Select Class Details</h2>
+        
+        <form method="post" action="{{ url_for('selection') }}">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px; margin: 10px;">
+                    <label for="section">Section:</label>
+                    <select id="section" name="section" required style="width: 100%;">
+                        <option value="">Select Section</option>
+                        {% for section in sections %}
+                        <option value="{{ section.id }}">{{ section.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px; margin: 10px;">
+                    <label for="group">Group:</label>
+                    <select id="group" name="group" required style="width: 100%;">
+                        <option value="">Select Group</option>
+                        <!-- Groups will be populated via JavaScript -->
+                    </select>
+                </div>
+                
+                <div style="flex: 1; min-width: 200px; margin: 10px;">
+                    <label for="subject">Subject:</label>
+                    <select id="subject" name="subject" required style="width: 100%;">
+                        <option value="">Select Subject</option>
+                        {% for subject in subjects %}
+                        <option value="{{ subject.id }}">{{ subject.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            
+            <div class="center-content" style="margin-top: 30px;">
+                <button type="submit">
+                    <i class="fas fa-arrow-right"></i> Proceed to Attendance
+                </button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 Lachoo Memorial College of Science & Technology</p>
+    </div>
+    
+    <!-- Flash messages
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div style="width: 600px; margin: 20px auto;">
+                {% for category, message in messages %}
+                    <div style="background-color: {% if category == 'danger' %}#f8d7da{% else %}#d4edda{% endif %}; 
+                                color: {% if category == 'danger' %}#721c24{% else %}#155724{% endif %}; 
+                                padding: 10px; 
+                                border-radius: 4px; 
+                                margin-bottom: 10px;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %} -->
+    
+    <!-- JavaScript for updating groups -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

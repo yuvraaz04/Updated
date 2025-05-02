@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lachoo College - Student Attendance System</title>
+    <style>
+        body {
+            background-color: #072653;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        img.logo {
+            float: left;
+            width: 7%;
+            height: auto;
+            border-radius: 50%;
+        }
+  
+        .header-box {
+            width: 100%;
+            background-color: white;
+            padding: 20px;
+            color: goldenrod;
+            font-family: 'Libre Baskerville', serif;
+            box-sizing: border-box;
+        }
+        
+        .marquee {
+            font-size: large; 
+            background-color: crimson;
+            color: yellow;
+            border: 2px 0 black;
+            width: 100%;
+            padding: 8px 0;
+        }
+        
+        .login-box {
+            width: 600px;
+            background-color: lightseagreen;
+            border: 2px solid rgb(186, 229, 237);
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 8px;
+        }
+        
+        label {
+            color: white;
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+        
+        input, select {
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+        }
+        
+        button:hover {
+            opacity: 0.8;
+        }
+        
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .forgot-password a {
+            color: yellow;
+            text-decoration: none;
+        }
+        
+        .center-content {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-box">
+        <img src="{{ url_for('static', filename='images/lachoo.jpeg') }}" alt="Lachoo College Logo" class="logo">
+        <div class="center-content">
+            <h1>Lachoo Memorial College of Science & Technology (AUTONOMOUS), Jodhpur</h1>
+            <p>Affiliated to Jai Narain Vyas University, Jodhpur</p>
+            <p>NAAC credited A Grade (consecutive three cycles)</p>
+            <p>UGC "College with Potential for Excellence" from October 2013</p>
+        </div>
+    </div>
+    
+    <marquee direction="right" class="marquee">70% attendance is must or will be not allowed to enter examination hall</marquee>
+    
+    <div class="login-box">
+        <form method="post" action="{{ url_for('login') }}">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your Username" required>
+            
+            <br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+            
+            <br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    
+    <div class="forgot-password">
+        <a href="#">Forgot Password?</a>
+    </div>
+    
+    <!-- Flash messages
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div style="width: 600px; margin: 20px auto;">
+                {% for category, message in messages %}
+                    <div style="background-color: {% if category == 'danger' %}#f8d7da{% else %}#d4edda{% endif %}; 
+                                color: {% if category == 'danger' %}#721c24{% else %}#155724{% endif %}; 
+                                padding: 10px; 
+                                border-radius: 4px; 
+                                margin-bottom: 10px;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %} -->
+</body>
+</html>

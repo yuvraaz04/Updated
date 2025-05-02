@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lachoo College - Attendance Summary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lachoo_style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    {% include 'lachoo_header.html' %}
+    {% include 'logout_button.html' %}
+    
+    <div class="content-box">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 150px; padding: 5px;">
+                <strong>Section:</strong> {{ section.name }}
+            </div>
+            <div style="flex: 1; min-width: 150px; padding: 5px;">
+                <strong>Group:</strong> {{ group.name }}
+            </div>
+            <div style="flex: 1; min-width: 150px; padding: 5px;">
+                <strong>Subject:</strong> {{ subject.name }}
+            </div>
+        </div>
+        <p><strong>Date:</strong> {{ current_date }}</p>
+        
+        <h2 class="center-content">Attendance Summary</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+            <div style="flex: 1; min-width: 300px;">
+                <div style="background-color: #04AA6D; padding: 10px; border-radius: 8px 8px 0 0;">
+                    <h3 style="color: white; margin: 0;">Present Students ({{ present_students|length }})</h3>
+                </div>
+                <div style="background-color: #0D3863; padding: 15px; border-radius: 0 0 8px 8px;">
+                    {% if present_students %}
+                    <ul style="list-style-type: none; padding: 0; margin: 0;">
+                        {% for student in present_students %}
+                        <li style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); display: flex; justify-content: space-between;">
+                            {{ student.name }}
+                            <span style="background-color: #04AA6D; padding: 3px 8px; border-radius: 4px; color: white;">Present</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="center-content">No students marked present</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div style="flex: 1; min-width: 300px;">
+                <div style="background-color: #d9534f; padding: 10px; border-radius: 8px 8px 0 0;">
+                    <h3 style="color: white; margin: 0;">Absent Students ({{ absent_students|length }})</h3>
+                </div>
+                <div style="background-color: #0D3863; padding: 15px; border-radius: 0 0 8px 8px;">
+                    {% if absent_students %}
+                    <ul style="list-style-type: none; padding: 0; margin: 0;">
+                        {% for student in absent_students %}
+                        <li style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                {{ student.name }}
+                                {% if student.phone_number %}
+                                <small style="display: block; font-size: 0.8em; color: #aaa;">{{ student.phone_number }}</small>
+                                {% endif %}
+                            </div>
+                            <div>
+                                <span style="background-color: #d9534f; padding: 3px 8px; border-radius: 4px; color: white; margin-right: 5px;">Absent</span>
+                                
+                                {% if student.phone_number %}
+                                <span style="background-color: #5bc0de; padding: 3px 8px; border-radius: 4px; color: white; font-size: 0.8em;">
+                                    <i class="fas fa-sms"></i> SMS Sent
+                                </span>
+                                {% else %}
+                                <span style="background-color: #f0ad4e; padding: 3px 8px; border-radius: 4px; color: white; font-size: 0.8em;">
+                                    <i class="fas fa-exclamation-triangle"></i> No Phone #
+                                </span>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="center-content">No students marked absent</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="center-content" style="margin-top: 30px;">
+            <h4>Attendance has been exported to: {{ csv_filename }}</h4>
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 15px;">
+                <a href="{{ url_for('selection') }}" class="btn-primary" style="text-decoration: none;">
+                    <i class="fas fa-clipboard"></i> New Attendance
+                </a>
+                <a href="#" class="btn-primary" style="text-decoration: none;" onclick="window.print()">
+                    <i class="fas fa-print"></i> Print Summary
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 Lachoo Memorial College of Science & Technology</p>
+    </div>
+</body>
+</html>
