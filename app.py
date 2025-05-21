@@ -10,7 +10,7 @@ import json
 from models import db, User, Section, Group, Subject, Student, Attendance
 from utils.face_recognition_utils import process_face_recognition, load_known_faces
 from utils.csv_utils import export_attendance_to_csv
-from utils.sms_utils import send_absence_notification
+# from utils.sms_utils import send_absence_notification
 
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
@@ -144,20 +144,20 @@ for student in ['Tanish', 'Yuvraj', 'Vishal', 'Suraj', 'Sanyam']:
         db.session.commit()
         
         # Create students with sample phone numbers for demonstration
-        student_data = [
-            {"name": "Tanish", "phone": "+919928687408"},
-            {"name": "Yuvraj", "phone": "+916376405987"},
-            {"name": "Vishal", "phone": "+919509595111"},
-            {"name": "Suraj", "phone": "+919876543204"},
-            {"name": "Sanyam", "phone": "+919876543205"}
-        ]
+        # student_data = [
+        #     {"name": "Tanish", "phone": "+919928687408"},
+        #     {"name": "Yuvraj", "phone": "+916376405987"},
+        #     {"name": "Vishal", "phone": "+919509595111"},
+        #     {"name": "Suraj", "phone": "+919876543204"},
+        #     {"name": "Sanyam", "phone": "+919876543205"}
+        # ]
         
-        for student_info in student_data:
-            student = Student(
-                name=student_info["name"],
-                phone_number=student_info["phone"]
-            )
-            db.session.add(student)
+        # for student_info in student_data:
+        #     student = Student(
+        #         name=student_info["name"],
+        #         phone_number=student_info["phone"]
+        #     )
+        #     db.session.add(student)
         
         db.session.commit()
 
@@ -268,26 +268,26 @@ def process_attendance():
         # Process face recognition
         recognition_result = process_face_recognition(image_data, student.name, RECOGNIZED_FACES_DIR)
         
-        if not recognition_result['success']:
-            return jsonify({"success": False, "message": recognition_result['message']}), 400
-    elif status == 'absent':
-        # Send SMS notification for absent student if phone number is available
-        if student.phone_number:
-            notification_result = send_absence_notification(
-                student_name=student.name,
-                phone_number=student.phone_number,
-                subject_name=subject.name,
-                section_name=section.name,
-                group_name=group.name,
-                date=datetime.now().strftime('%Y-%m-%d')
-            )
+    #     if not recognition_result['success']:
+    #         return jsonify({"success": False, "message": recognition_result['message']}), 400
+    # elif status == 'absent':
+    #     # Send SMS notification for absent student if phone number is available
+    #     if student.phone_number:
+    #         notification_result = send_absence_notification(
+    #             student_name=student.name,
+    #             phone_number=student.phone_number,
+    #             subject_name=subject.name,
+    #             section_name=section.name,
+    #             group_name=group.name,
+    #             date=datetime.now().strftime('%Y-%m-%d')
+    #         )
             
-            if notification_result['success']:
-                logging.info(f"SMS notification sent to {student.name}")
-            else:
-                logging.warning(f"Failed to send SMS to {student.name}: {notification_result['message']}")
-        else:
-            logging.warning(f"No phone number available for {student.name}. SMS notification not sent.")
+    #         if notification_result['success']:
+    #             logging.info(f"SMS notification sent to {student.name}")
+    #         else:
+    #             logging.warning(f"Failed to send SMS to {student.name}: {notification_result['message']}")
+    #     else:
+    #         logging.warning(f"No phone number available for {student.name}. SMS notification not sent.")
     
     # Record the attendance
     attendance = Attendance(

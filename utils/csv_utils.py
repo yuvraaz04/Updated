@@ -41,8 +41,8 @@ def export_attendance_to_csv(section_name, group_name, subject_name, present_stu
                 subject_name,
                 student.name,
                 'Present',
-                student.phone_number or 'N/A',
-                'N/A'  # No notifications for present students
+                # student.phone_number or 'N/A',
+                # 'N/A'  # No notifications for present students
             ])
             
         # Write absent students
@@ -54,8 +54,8 @@ def export_attendance_to_csv(section_name, group_name, subject_name, present_stu
                 subject_name,
                 student.name,
                 'Absent',
-                student.phone_number or 'N/A',
-                'Yes' if student.phone_number else 'No'  # Notifications only sent if phone number exists
+                # student.phone_number or 'N/A',
+                # 'Yes' if student.phone_number else 'No'  # Notifications only sent if phone number exists
             ])
     
     return filename

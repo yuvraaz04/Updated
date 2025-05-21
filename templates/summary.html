@@ -58,14 +58,14 @@
                         <li style="padding: 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); display: flex; justify-content: space-between; align-items: center;">
                             <div>
                                 {{ student.name }}
-                                {% if student.phone_number %}
+                                <!-- {% if student.phone_number %}
                                 <small style="display: block; font-size: 0.8em; color: #aaa;">{{ student.phone_number }}</small>
-                                {% endif %}
+                                {% endif %} -->
                             </div>
                             <div>
                                 <span style="background-color: #d9534f; padding: 3px 8px; border-radius: 4px; color: white; margin-right: 5px;">Absent</span>
                                 
-                                {% if student.phone_number %}
+                                <!-- {% if student.phone_number %}
                                 <span style="background-color: #5bc0de; padding: 3px 8px; border-radius: 4px; color: white; font-size: 0.8em;">
                                     <i class="fas fa-sms"></i> SMS Sent
                                 </span>
@@ -73,7 +73,7 @@
                                 <span style="background-color: #f0ad4e; padding: 3px 8px; border-radius: 4px; color: white; font-size: 0.8em;">
                                     <i class="fas fa-exclamation-triangle"></i> No Phone #
                                 </span>
-                                {% endif %}
+                                {% endif %} -->
                             </div>
                         </li>
                         {% endfor %}
